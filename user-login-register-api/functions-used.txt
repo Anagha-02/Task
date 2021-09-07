@@ -1,0 +1,8 @@
+npm init
+npm i --save express
+npm i --save-dev nodemon
+npm i --save mongoose
+npm i --save bcryptjs
+npm i --save jsonwebtoken
+
+VS plugin - Rest Client (to run apis in route.rest)
