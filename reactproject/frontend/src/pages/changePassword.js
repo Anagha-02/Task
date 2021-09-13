@@ -1,25 +1,40 @@
 import React, { Component } from 'react';
 import { Form, FormGroup, FormControl, Button, FormLabel } from 'react-bootstrap';
-import { Redirect } from 'react-router-dom';
 
 import '../App.css';
 import Auth from '../components/auth';
-import LoginSucess from './loginSucess';
-
 
 function PageHeading() {
     return (
         <div className="loginPage">
-            <h2>Login Page</h2>
+            <h2>Change Password Page</h2>
         </div>
     )
 }
 
-class LoginPage extends Component {
+function ChangePasswordSucess({ userId, message, status }) {
+    if (status === "error" || (message === 0 || message === null || message === '')) {
+        return (
+            <div className="errorMessage">
+                {message}
+            </div>
+        );
+    }
+    else {
+        return (
+            <div className="sucessMessage">
+                <p> {message}</p>
+            </div>
+
+        );
+    }
+}
+
+class ChangePasswordPage extends Component {
 
     constructor(props) {
         super(props);
-        this.usernameFm = React.createRef();
+        this.confirmpasswordFm = React.createRef();
         this.passwordFm = React.createRef();
         this.state = {
             status: null,
@@ -30,77 +45,65 @@ class LoginPage extends Component {
 
     static contextType = Auth;
 
-    submitHandler() {
-        <Redirect to="/loginSucess">
-            <LoginSucess
-                userId={this.state.id}
-                message={this.state.message}
-            />
-        </Redirect>;
-    };
-
     onClickHandler = event => {
         event.preventDefault();
 
-        const username = this.usernameFm.current.value;
+        const token = this.context.token;
+        const confirmPassword = this.confirmpasswordFm.current.value;
         const password = this.passwordFm.current.value;
 
-        if (username.trim().length === 0 || password.trim().length === 0) {
-            return this.setState({
-              status: "error",
-              message: "Please enter username and password",
-              id: 0
-            });
-          }
+        console.log("token in password file: " + token);
 
-        /*
-                if (username.trim().length === 0 || password.trim().length === 0) {
-                    this.context({
-                        status: "error",
-                        message: "Please enter username and password",
-                        id: 0
-                    })
-                }
-        */
+        if (confirmPassword.trim().length === 0 || password.trim().length === 0) {
+            return this.setState({
+                status: "error",
+                message: "Please enter password",
+                id: 0
+            });
+        }
+        else if (password !== confirmPassword) {
+            return this.setState({
+                status: "error",
+                message: "Passwords do not match",
+                id: 0
+            });
+        }
         let requestBody = {
-            username: `${username}`,
-            password: `${password}`
+            newpassword: `${password}`,
+            token: `${token}`
         }
 
-        fetch('http://localhost:9000/users/login', {
+        fetch('http://localhost:9000/users/change-password/', {
             method: 'POST',
             body: JSON.stringify(requestBody),
             headers: {
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
+                'Access-Control-Allow-Origin': '*',
+                'Authorization': token
             }
         })
             .then(res => {
                 return res.json();
             })
             .then(resData => {
-                if (resData.status === "error") {
+                if (resData.status) {
                     this.setState({
                         status: resData.status,
                         message: resData.error,
                         id: 0
                     });
                 }
-                else if (resData.status === "ok") {
+                else {
                     this.setState({
-                        status: resData.status,
+                        status: "ok",
                         id: resData.id,
-                        message: resData.username
+                        message: "Password changed sucessfully"
                     });
-                    this.context.token = resData.token;
-                    this.context.id = resData.id;
                 }
-                console.log("token: " + this.context.token);
             })
             .catch(err => {
                 console.log(err);
             });
-            
     };
 
     render() {
@@ -110,23 +113,24 @@ class LoginPage extends Component {
                     <PageHeading />
                 </div>
                 <div>
-                    <LoginSucess
+                    <ChangePasswordSucess
+                        status={this.state.status}
                         userId={this.state.id}
                         message={this.state.message}
                     />
                 </div>
                 <Form className="auth-form" onSubmit={this.onClickHandler}>
-                    <FormGroup controlId="formUsername" className="text-field" >
-                        <FormLabel>Username: </FormLabel>
-                        <FormControl type="text" placeholder="Username" ref={this.usernameFm} />
-                    </FormGroup>
-                    <FormGroup controlId="formPassword" className="text-field">
-                        <FormLabel>Password: </FormLabel>
+                    <FormGroup controlId="formPassword" className="text-field" >
+                        <FormLabel htmlFor="password">Password: </FormLabel>
                         <FormControl type="password" placeholder="Password" ref={this.passwordFm} />
+                    </FormGroup>
+                    <FormGroup controlId="formPassword1" className="text-field">
+                        <FormLabel htmlFor="password">Confirm Password: </FormLabel>
+                        <FormControl type="password" placeholder="Confirm Password" ref={this.confirmpasswordFm} />
                     </FormGroup>
                     <FormGroup controlId="formSubmit">
                         <Button className="submitButton" type="submit">
-                            Login
+                            Submit
                         </Button>
                     </FormGroup>
                 </Form>
@@ -135,4 +139,4 @@ class LoginPage extends Component {
     }
 }
 
-export default LoginPage;
+export default ChangePasswordPage;

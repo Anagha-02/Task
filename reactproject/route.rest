@@ -1,17 +1,15 @@
-// Using VS Code plugin - Rest Client
-
 //Get all users
 GET http://localhost:9000/users
 
 ###
 
-//Get single user
+//Get single user by Id
 GET http://localhost:9000/users/61370cacb2fe622c0de13e46
 
 ###
 
 //Delete user 
-DELETE http://localhost:9000/users/61372dd99882784073908251
+DELETE http://localhost:9000/users/613c9f9c665c4dc7e7fe4407
 
 ###
 
@@ -40,10 +38,11 @@ Content-Type: application/json
 //Update - get token in login api
 POST http://localhost:9000/users/change-password/
 Content-Type: application/json
+Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMzcwY2FjYjJmZTYyMmMwZGUxM2U0NiIsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2MzE1MTg3ODd9.XFDyoGYsUlIVcCSLwzLcEIowQU9Gff9bu2axX494-MI"
 
 {
     "newpassword": "admin",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMzcwY2FjYjJmZTYyMmMwZGUxM2U0NiIsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2MzA5OTc5OTl9.gmAn3O1f7vEUyD2eLzevUpMNkYLcdeMkL6rvWZKD6RA"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMzcwY2FjYjJmZTYyMmMwZGUxM2U0NiIsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2MzE1MTg3ODd9.XFDyoGYsUlIVcCSLwzLcEIowQU9Gff9bu2axX494-MI"
 }
 
 ###
