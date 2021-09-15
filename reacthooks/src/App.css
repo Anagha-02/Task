@@ -1,0 +1,128 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  margin: 5pt;
+  padding: 1px;
+  color: #240ea3;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loginPage{
+  background-color: #4e77ff;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  color: rgb(53, 3, 3);
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.auth-form{
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: initial;
+  align-items: center;
+  color: rgb(59, 2, 2);
+  margin-top: 10pt;
+  padding: 10px;
+  font-style: normal;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.submitButton{
+  margin: 5pt;
+  padding: 1px;
+}
+
+.text-field{
+  margin: 2pt;
+  padding: 1px;
+}
+
+.nav-header{
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 3.5rem;
+  background-color: #85a9f0;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  color: #f6f7f8;
+}
+
+
+.main-navigation__items {
+  text-decoration: none;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border: none;
+  font: inherit;
+  background: transparent;
+  cursor: pointer;
+  vertical-align: middle;
+  margin: 0;
+}
+
+.listClass{
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  justify-content: left;
+  font-size: medium;
+  color: white;
+}
+
+.errorMessage{
+  color: red;
+  font-size: medium;
+  text-align: left;
+  padding: 5px;
+  margin: 10px;
+}
+
+.sucessMessage{
+  font-size: large;
+  padding: auto;
+  margin-top: auto;
+}
+
+.userDiv{
+    padding: 5px;
+    margin: 10px;
+}
