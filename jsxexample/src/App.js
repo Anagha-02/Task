@@ -1,14 +1,26 @@
-import './App.css';
-import LoginPage from './Login';
+import { useState } from 'react';
+
+const bgred = {
+  background: 'red',
+  align: 'center'
+}
+const bgblue = {
+  background: 'blue',
+  align: 'center'
+}
 
 function App() {
-    return (
-      <div>
-        <h1> This is a JSX Example. </h1>
-        <LoginPage />
-      </div>
-    );
-  }
+  const [toggle, setToggle] = useState(true);
 
+  let btn_class = toggle ? bgred : bgblue;
+
+  return (
+    <div style={{margin:10}}>
+      <button style={btn_class} onClick={() => { setToggle(!toggle); }}>
+        Button
+      </button>
+    </div>
+  );
+}
 
 export default App;
