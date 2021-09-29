@@ -100,6 +100,7 @@ router.post('/change-password', async (req, res) => {
 
 router.delete('/:id', getUser, async (req, res) => {
 	try {
+		console.log(res.user)
 		await res.user.remove()
 		res.json({ status: 'ok', message: 'Deleted User' })
 	} catch (err) {
