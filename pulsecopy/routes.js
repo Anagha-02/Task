@@ -18,22 +18,28 @@ MongoClient.connect(LOADER_URI, { useUnifiedTopology: true }, (err, client) => {
   const flatFileExportCtrl = new FlatFileExportCtrl(pulseDevDb)
 
   // const flatFileExportCtrl = new FlatFileExportCtrl()
+  /*
   app.post('/save/delete',
     // flatFileExportCtrl.getConfiguration,
     async (req, res) => {
       flatFileExportCtrl.deleteExportConfiguration(req, res)
     })
-
-  app.post('/save', async (req, res) => {
-    flatFileExportCtrl.saveExportConfiguration(req, res)
-  })
+*/
+  app.post('/save',
+    flatFileExportCtrl.validationSchema(),
+    flatFileExportCtrl.validate,
+    async (req, res) => {
+      flatFileExportCtrl.saveExportConfiguration(req, res)
+    })
 
   app.put('/edit/:configId',
-      // flatFileExportCtrl.getConfiguration,
-      async (req, res) => {
-        flatFileExportCtrl.editExportConfiguration(req, res)
-      }
-    )
+    // flatFileExportCtrl.getConfiguration,
+    flatFileExportCtrl.validationSchema('edit'),
+    flatFileExportCtrl.validate,
+    async (req, res) => {
+      flatFileExportCtrl.editExportConfiguration(req, res)
+    }
+  )
 })
 
 module.exports = app;

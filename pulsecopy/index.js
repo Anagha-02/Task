@@ -7,34 +7,36 @@ const server = http.createServer(app)
 
 const route = require('./routes');
 const jwt = require('express-jwt');
-const JwksRsa = require('jwks-rsa');
+const jwksRsa = require('jwks-rsa');
 
 const port = 9000;
 
 /*
 var checkJwt = jwt({
-    secret: jwksRsa.expressJwtSecret({
-      cache: true,
-      rateLimit: true,
-      jwksRequestsPerMinute: 5,
-      jwksUri: 'https://your-tenant.auth0.com/.well-known/jwks.json',
-    }),
-    audience: 'https://api.c0der.io/v1/',
-    issuer: 'https://your-tenant.auth0.com/',
-    algorithms: ['RS256'],
-  })
+  secret: jwksRsa.expressJwtSecret({
+    cache: true,
+    rateLimit: true,
+    jwksRequestsPerMinute: 5,
+    jwksUri: 'https://pulse-polaris.auth0.com/.well-known/jwks.json',
+  }),
+  audience: 'https://polaris-api.com/',
+  issuer: 'https://pulse-polaris.auth0.com/',
+  algorithms: ['RS256'],
+  
+})
 */
 
 var checkJwt = jwt({
-  secret: JwksRsa.expressJwtSecret({
+  secret: jwksRsa.expressJwtSecret({
     cache: true,
     rateLimit: true,
     jwksRequestsPerMinute: 5,
     jwksUri: 'https://your-tenant.auth0.com/.well-known/jwks.json',
   }),
   audience: 'https://api.c0der.io/v1/',
-    issuer: 'https://your-tenant.auth0.com/',
-    algorithms: ['RS256']
+  issuer: 'https://your-tenant.auth0.com/',
+  algorithms: ['RS256']
+
 })
 
 app.use(express.json());
