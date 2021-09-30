@@ -105,7 +105,10 @@ class FlatFileExportController {
             return next()
         }
         const extractedErrors = []
-        errors.array().map((err) => extractedErrors.push({ value: err.value, [err.param]: err.msg }))
+        errors.array().map((err) => {
+        if(err.value === "" || err.param === 'configId')
+            extractedErrors.push({ currentValue: err.value, [err.param]: err.msg })
+        })
 
         return res.json({ status: "error", message: extractedErrors })
     }
