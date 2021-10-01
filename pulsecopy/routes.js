@@ -18,13 +18,7 @@ MongoClient.connect(LOADER_URI, { useUnifiedTopology: true }, (err, client) => {
   const flatFileExportCtrl = new FlatFileExportCtrl(pulseDevDb)
 
   // const flatFileExportCtrl = new FlatFileExportCtrl()
-  /*
-  app.post('/save/delete',
-    // flatFileExportCtrl.getConfiguration,
-    async (req, res) => {
-      flatFileExportCtrl.deleteExportConfiguration(req, res)
-    })
-*/
+  
   app.post('/save',
     flatFileExportCtrl.validationSchema(),
     flatFileExportCtrl.validate,
@@ -40,6 +34,16 @@ MongoClient.connect(LOADER_URI, { useUnifiedTopology: true }, (err, client) => {
       flatFileExportCtrl.editExportConfiguration(req, res)
     }
   )
+
+  app.get(
+    '/export-config',
+    // flatFileExportCtrl.validationSchema('download'),
+    // flatFileExportCtrl.validate,
+    async (req, res) => {
+      flatFileExportCtrl.getExcelSheets(req, res)
+    }
+  )
+
 })
 
 module.exports = app;

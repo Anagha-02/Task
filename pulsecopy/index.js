@@ -9,7 +9,7 @@ const route = require('./routes');
 const jwt = require('express-jwt');
 const jwksRsa = require('jwks-rsa');
 
-const port = 9000;
+const port = 8000;
 
 /*
 var checkJwt = jwt({
@@ -33,10 +33,7 @@ var checkJwt = jwt({
     jwksRequestsPerMinute: 5,
     jwksUri: 'https://your-tenant.auth0.com/.well-known/jwks.json',
   }),
-  audience: 'https://api.c0der.io/v1/',
-  issuer: 'https://your-tenant.auth0.com/',
   algorithms: ['RS256']
-
 })
 
 app.use(express.json());
